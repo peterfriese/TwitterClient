@@ -18,6 +18,7 @@
 @implementation AccountsListViewController
 
 @synthesize accounts = _accounts;
+@synthesize accountStore = _accountStore;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -42,12 +43,14 @@
 - (void)fetchData
 {
     if (_accounts == nil) {
-        ACAccountStore *store = [[ACAccountStore alloc] init];
-        ACAccountType *accountTypeTwitter = [store accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-        [store requestAccessToAccountsWithType:accountTypeTwitter withCompletionHandler:^(BOOL granted, NSError *error) {
+        if (_accountStore == nil) {
+            self.accountStore = [[ACAccountStore alloc] init];
+        }
+        ACAccountType *accountTypeTwitter = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+        [self.accountStore requestAccessToAccountsWithType:accountTypeTwitter withCompletionHandler:^(BOOL granted, NSError *error) {
             if(granted) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    self.accounts = [store accountsWithAccountType:accountTypeTwitter];
+                    self.accounts = [self.accountStore accountsWithAccountType:accountTypeTwitter];
                     [self.tableView reloadData]; 
                 });
             }
@@ -119,7 +122,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -128,10 +131,10 @@
     cell.detailTextLabel.text = account.accountDescription;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    TWRequest *fetchAdvancedUserProperties = [[[TWRequest alloc] 
+    TWRequest *fetchAdvancedUserProperties = [[TWRequest alloc] 
                                               initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/users/show.json"] 
                                               parameters:[NSDictionary dictionaryWithObjectsAndKeys:account.username, @"screen_name", nil]
-                                              requestMethod:TWRequestMethodGET] autorelease];
+                                              requestMethod:TWRequestMethodGET];
     [fetchAdvancedUserProperties performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if ([urlResponse statusCode] == 200) {
             dispatch_sync(dispatch_get_main_queue(), ^{
@@ -142,10 +145,10 @@
             });
         }
     }];
-    TWRequest *fetchUserImageRequest = [[[TWRequest alloc] 
+    TWRequest *fetchUserImageRequest = [[TWRequest alloc] 
                                         initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.twitter.com/1/users/profile_image/%@", account.username]] 
                                         parameters:nil
-                                         requestMethod:TWRequestMethodGET] autorelease];
+                                         requestMethod:TWRequestMethodGET];
     [fetchUserImageRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if ([urlResponse statusCode] == 200) {
             UIImage *image = [UIImage imageWithData:responseData];
@@ -162,7 +165,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TweetsListViewController *tweetsListViewController = [[[TweetsListViewController alloc] init] autorelease];
+    TweetsListViewController *tweetsListViewController = [[TweetsListViewController alloc] init];
     tweetsListViewController.account = [self.accounts objectAtIndex:[indexPath row]];
     [self.navigationController pushViewController:tweetsListViewController animated:TRUE];
 }

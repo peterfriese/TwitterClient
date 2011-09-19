@@ -16,22 +16,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    AccountsListViewController *accountsListViewController = [[[AccountsListViewController alloc] init] autorelease];
-    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:accountsListViewController] autorelease];
+    AccountsListViewController *accountsListViewController = [[AccountsListViewController alloc] init];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:accountsListViewController];
     [self.window addSubview:self.navigationController.view];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
-}
-
-- (void)dealloc
-{
-    [_navigationController release];
-    [_window release];
-    [super dealloc];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

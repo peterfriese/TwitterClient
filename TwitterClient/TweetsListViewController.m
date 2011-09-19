@@ -33,9 +33,9 @@
 
 - (void)fetchData
 {
-    TWRequest *postRequest = [[[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/statuses/home_timeline.json"] 
+    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/statuses/home_timeline.json"] 
                                                  parameters:nil 
-                                              requestMethod:TWRequestMethodGET] autorelease];
+                                              requestMethod:TWRequestMethodGET];
     [postRequest setAccount:self.account];    
     [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if ([urlResponse statusCode] == 200) {
@@ -54,7 +54,7 @@
 
 - (void)composeTweet
 {
-    TWTweetComposeViewController *tweetComposeViewController = [[[TWTweetComposeViewController alloc] init] autorelease];
+    TWTweetComposeViewController *tweetComposeViewController = [[TWTweetComposeViewController alloc] init];
     [tweetComposeViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
         [self dismissModalViewControllerAnimated:YES];
     }];
@@ -72,7 +72,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(composeTweet)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(composeTweet)];
 }
 
 - (void)viewDidUnload
@@ -128,7 +128,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
