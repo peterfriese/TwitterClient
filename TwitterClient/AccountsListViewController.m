@@ -127,6 +127,34 @@
     cell.textLabel.text = account.username;
     cell.detailTextLabel.text = account.accountDescription;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    TWRequest *fetchAdvancedUserProperties = [[[TWRequest alloc] 
+                                              initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/users/show.json"] 
+                                              parameters:[NSDictionary dictionaryWithObjectsAndKeys:account.username, @"screen_name", nil]
+                                              requestMethod:TWRequestMethodGET] autorelease];
+    [fetchAdvancedUserProperties performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if ([urlResponse statusCode] == 200) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                NSError *error;
+                id userInfo = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+                cell.textLabel.text = [userInfo valueForKey:@"name"];
+                
+            });
+        }
+    }];
+    TWRequest *fetchUserImageRequest = [[[TWRequest alloc] 
+                                        initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.twitter.com/1/users/profile_image/%@", account.username]] 
+                                        parameters:nil
+                                         requestMethod:TWRequestMethodGET] autorelease];
+    [fetchUserImageRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if ([urlResponse statusCode] == 200) {
+            UIImage *image = [UIImage imageWithData:responseData];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                cell.imageView.image = image;
+                [cell setNeedsLayout];
+            });
+        }
+    }];
     return cell;
 }
 
@@ -134,13 +162,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
     TweetsListViewController *tweetsListViewController = [[[TweetsListViewController alloc] init] autorelease];
     tweetsListViewController.account = [self.accounts objectAtIndex:[indexPath row]];
     [self.navigationController pushViewController:tweetsListViewController animated:TRUE];
