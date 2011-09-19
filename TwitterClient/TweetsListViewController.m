@@ -8,6 +8,10 @@
 
 #import "TweetsListViewController.h"
 
+@interface TweetsListViewController(private)
+- (void)fetchData;
+@end
+
 @implementation TweetsListViewController
 
 @synthesize account = _account;
@@ -72,7 +76,13 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(composeTweet)];
+    UIBarButtonItem *compose = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose 
+                                                                             target:self 
+                                                                             action:@selector(composeTweet)];
+    UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+                                                                             target:self 
+                                                                             action:@selector(fetchData)];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:compose, refresh, nil];
 }
 
 - (void)viewDidUnload
