@@ -16,6 +16,7 @@
 		88850FD9142730A2000A61F9 /* AccountsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88850FD8142730A2000A61F9 /* AccountsListViewController.m */; };
 		88850FDE1427330F000A61F9 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88850FDD1427330F000A61F9 /* Twitter.framework */; };
 		88850FE014273316000A61F9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88850FDF14273316000A61F9 /* Accounts.framework */; };
+		88850FE3142744C0000A61F9 /* TweetsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88850FE2142744C0000A61F9 /* TweetsListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		88850FD8142730A2000A61F9 /* AccountsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsListViewController.m; sourceTree = "<group>"; };
 		88850FDD1427330F000A61F9 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		88850FDF14273316000A61F9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		88850FE1142744C0000A61F9 /* TweetsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetsListViewController.h; sourceTree = "<group>"; };
+		88850FE2142744C0000A61F9 /* TweetsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetsListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 				88850FC714272FBA000A61F9 /* Supporting Files */,
 				88850FD7142730A2000A61F9 /* AccountsListViewController.h */,
 				88850FD8142730A2000A61F9 /* AccountsListViewController.m */,
+				88850FE1142744C0000A61F9 /* TweetsListViewController.h */,
+				88850FE2142744C0000A61F9 /* TweetsListViewController.m */,
 			);
 			path = TwitterClient;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 				88850FCD14272FBA000A61F9 /* main.m in Sources */,
 				88850FD114272FBA000A61F9 /* PFAppDelegate.m in Sources */,
 				88850FD9142730A2000A61F9 /* AccountsListViewController.m in Sources */,
+				88850FE3142744C0000A61F9 /* TweetsListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +196,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -216,7 +222,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
