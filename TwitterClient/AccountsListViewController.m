@@ -9,6 +9,7 @@
 #import "AccountsListViewController.h"
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
+#import "TweetsListViewController.h"
 
 @interface AccountsListViewController (private)
 - (void)fetchData;
@@ -21,6 +22,7 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
+    self.title = @"Accounts";
     if (self) {
         [self fetchData];
     }
@@ -39,13 +41,13 @@
 
 - (void)fetchData
 {
-    if (_accounts == NULL) {
+    if (_accounts == nil) {
         ACAccountStore *store = [[ACAccountStore alloc] init];
         ACAccountType *accountTypeTwitter = [store accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
         [store requestAccessToAccountsWithType:accountTypeTwitter withCompletionHandler:^(BOOL granted, NSError *error) {
             if(granted) {
-                _accounts = [store accountsWithAccountType:accountTypeTwitter];
                 dispatch_sync(dispatch_get_main_queue(), ^{
+                    self.accounts = [store accountsWithAccountType:accountTypeTwitter];
                     [self.tableView reloadData]; 
                 });
             }
@@ -117,13 +119,14 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Configure the cell...
     ACAccount *account = [self.accounts objectAtIndex:[indexPath row]];
     cell.textLabel.text = account.username;
     cell.detailTextLabel.text = account.accountDescription;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -138,6 +141,9 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    TweetsListViewController *tweetsListViewController = [[[TweetsListViewController alloc] init] autorelease];
+    tweetsListViewController.account = [self.accounts objectAtIndex:[indexPath row]];
+    [self.navigationController pushViewController:tweetsListViewController animated:TRUE];
 }
 
 @end
