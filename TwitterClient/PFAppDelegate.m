@@ -7,15 +7,21 @@
 //
 
 #import "PFAppDelegate.h"
+#import "AccountsListViewController.h"
 
 @implementation PFAppDelegate
 
 @synthesize window = _window;
+@synthesize navigationController = _navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    
+    AccountsListViewController *accountsListViewController = [[AccountsListViewController alloc] init];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:accountsListViewController];
+    [self.window addSubview:self.navigationController.view];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
