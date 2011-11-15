@@ -6,10 +6,10 @@
 //  Copyright (c) 2011 itemis. All rights reserved.
 //
 
-#import "PFAppDelegate.h"
+#import "AppDelegate.h"
 #import "AccountsListViewController.h"
 
-@implementation PFAppDelegate
+@implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
