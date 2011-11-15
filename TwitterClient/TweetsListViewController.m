@@ -7,6 +7,7 @@
 //
 
 #import "TweetsListViewController.h"
+#import "TweetComposeViewController.h"
 
 @interface TweetsListViewController(private)
 - (void)fetchData;
@@ -58,11 +59,21 @@
 
 - (void)composeTweet
 {
-    TWTweetComposeViewController *tweetComposeViewController = [[TWTweetComposeViewController alloc] init];
-    [tweetComposeViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
-        [self dismissModalViewControllerAnimated:YES];
-    }];
-    [self presentModalViewController:tweetComposeViewController animated:YES];
+    TweetComposeViewController *tweetComposeViewController = [[TweetComposeViewController alloc] init];
+    tweetComposeViewController.account = self.account;
+    tweetComposeViewController.tweetComposeDelegate = self;
+    [self presentViewController:tweetComposeViewController animated:YES completion:nil];
+    
+//    TWTweetComposeViewController *tweetComposeViewController = [[TWTweetComposeViewController alloc] init];
+//    [tweetComposeViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
+//        [self dismissModalViewControllerAnimated:YES];
+//    }];
+//    [self presentModalViewController:tweetComposeViewController animated:YES];
+}
+
+- (void)tweetComposeViewController:(TweetComposeViewController *)controller didFinishWithResult:(TweetComposeResult)result {
+    [self dismissModalViewControllerAnimated:YES];
+    [self fetchData];
 }
 
 #pragma mark - View lifecycle
@@ -94,7 +105,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.title = self.account.username;
+    self.title = [NSString stringWithFormat:@"@%@", self.account.username];
     [self fetchData];
     [super viewWillAppear:animated];
 }

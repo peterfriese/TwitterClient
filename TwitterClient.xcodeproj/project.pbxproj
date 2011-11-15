@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		882735EC1472CAB7009B73B5 /* TweetComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882735EA1472CAB7009B73B5 /* TweetComposeViewController.m */; };
+		882735ED1472CAB7009B73B5 /* TweetComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882735EB1472CAB7009B73B5 /* TweetComposeViewController.xib */; };
 		88850FC114272FBA000A61F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88850FC014272FBA000A61F9 /* UIKit.framework */; };
 		88850FC314272FBA000A61F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88850FC214272FBA000A61F9 /* Foundation.framework */; };
 		88850FC514272FBA000A61F9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88850FC414272FBA000A61F9 /* CoreGraphics.framework */; };
@@ -20,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		882735E91472CAB7009B73B5 /* TweetComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetComposeViewController.h; sourceTree = "<group>"; };
+		882735EA1472CAB7009B73B5 /* TweetComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetComposeViewController.m; sourceTree = "<group>"; };
+		882735EB1472CAB7009B73B5 /* TweetComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetComposeViewController.xib; sourceTree = "<group>"; };
 		88850FBC14272FBA000A61F9 /* TwitterClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88850FC014272FBA000A61F9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		88850FC214272FBA000A61F9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,6 +98,9 @@
 				88850FD8142730A2000A61F9 /* AccountsListViewController.m */,
 				888B42E9144D5FE400A8FAFC /* TweetsListViewController.h */,
 				888B42EA144D5FE400A8FAFC /* TweetsListViewController.m */,
+				882735E91472CAB7009B73B5 /* TweetComposeViewController.h */,
+				882735EA1472CAB7009B73B5 /* TweetComposeViewController.m */,
+				882735EB1472CAB7009B73B5 /* TweetComposeViewController.xib */,
 			);
 			path = TwitterClient;
 			sourceTree = "<group>";
@@ -160,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88850FCB14272FBA000A61F9 /* InfoPlist.strings in Resources */,
+				882735ED1472CAB7009B73B5 /* TweetComposeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +183,7 @@
 				88850FD114272FBA000A61F9 /* AppDelegate.m in Sources */,
 				88850FD9142730A2000A61F9 /* AccountsListViewController.m in Sources */,
 				888B42EB144D5FE400A8FAFC /* TweetsListViewController.m in Sources */,
+				882735EC1472CAB7009B73B5 /* TweetComposeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

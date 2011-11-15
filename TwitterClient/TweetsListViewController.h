@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
+#import "TweetComposeViewController.h"
 
-@interface TweetsListViewController : UITableViewController
+@interface TweetsListViewController : UITableViewController<TweetComposeViewControllerDelegate>
 
 @property (strong, nonatomic) ACAccount *account;
 @property (strong, nonatomic) id timeline;
