@@ -41,6 +41,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.titleView.title = [NSString stringWithFormat:@"@%@", self.account.username];    
+    [textView setKeyboardType:UIKeyboardTypeTwitter];
     [textView becomeFirstResponder];
 }
 
