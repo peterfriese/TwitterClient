@@ -38,11 +38,12 @@
 
 - (void)fetchData
 {
-    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/statuses/home_timeline.json"] 
+    NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1/statuses/home_timeline.json"];
+    TWRequest *request = [[TWRequest alloc] initWithURL:url 
                                                  parameters:nil 
                                               requestMethod:TWRequestMethodGET];
-    [postRequest setAccount:self.account];    
-    [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [request setAccount:self.account];    
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if ([urlResponse statusCode] == 200) {
             NSError *jsonError = nil;
 
