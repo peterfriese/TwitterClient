@@ -46,11 +46,21 @@
     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if ([urlResponse statusCode] == 200) {
             NSError *jsonError = nil;
-
-            self.timeline = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonError];
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
+            id jsonResult = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonError];
+            if (jsonResult != nil) {
+                self.timeline = jsonResult;
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });                
+            }
+            else {
+                NSString *message = [NSString stringWithFormat:@"Could not parse your timeline: %@", [jsonError localizedDescription]];
+                [[[UIAlertView alloc] initWithTitle:@"Error" 
+                                            message:message
+                                           delegate:nil 
+                                  cancelButtonTitle:@"Cancel" 
+                                  otherButtonTitles:nil] show];
+            }
         }
     }];
 
