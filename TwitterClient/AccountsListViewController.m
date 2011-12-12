@@ -11,8 +11,10 @@
 #import <Accounts/Accounts.h>
 #import "TweetsListViewController.h"
 
-@interface AccountsListViewController (private)
+@interface AccountsListViewController ()
 - (void)fetchData;
+@property (strong, nonatomic) NSCache *usernameCache;
+@property (strong, nonatomic) NSCache *imageCache;
 @end
 
 @implementation AccountsListViewController
@@ -20,11 +22,18 @@
 @synthesize accounts = _accounts;
 @synthesize accountStore = _accountStore;
 
+@synthesize imageCache = _imageCache;
+@synthesize usernameCache = _usernameCache;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     self.title = @"Accounts";
     if (self) {
+        _imageCache = [[NSCache alloc] init];
+        [_imageCache setName:@"TWImageCache"];
+        _usernameCache = [[NSCache alloc] init];
+        [_usernameCache setName:@"TWUsernameCache"];
         [self fetchData];
     }
     return self;
@@ -32,10 +41,9 @@
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
+    [_imageCache removeAllObjects];
+    [_usernameCache removeAllObjects];
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - Data handling
@@ -60,56 +68,12 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -131,33 +95,48 @@
     cell.detailTextLabel.text = account.accountDescription;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    TWRequest *fetchAdvancedUserProperties = [[TWRequest alloc] 
-                                              initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/users/show.json"] 
-                                              parameters:[NSDictionary dictionaryWithObjectsAndKeys:account.username, @"screen_name", nil]
-                                              requestMethod:TWRequestMethodGET];
-    [fetchAdvancedUserProperties performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if ([urlResponse statusCode] == 200) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
+    NSString *username = [_usernameCache objectForKey:account.username];
+    if (username) {
+        cell.textLabel.text = username;
+    }
+    else {
+        TWRequest *fetchAdvancedUserProperties = [[TWRequest alloc] 
+                                                  initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/users/show.json"] 
+                                                  parameters:[NSDictionary dictionaryWithObjectsAndKeys:account.username, @"screen_name", nil]
+                                                  requestMethod:TWRequestMethodGET];
+        [fetchAdvancedUserProperties performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+            if ([urlResponse statusCode] == 200) {
                 NSError *error;
                 id userInfo = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
-                cell.textLabel.text = [userInfo valueForKey:@"name"];
-                
-            });
-        }
-    }];
-    TWRequest *fetchUserImageRequest = [[TWRequest alloc] 
-                                        initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.twitter.com/1/users/profile_image/%@", account.username]] 
-                                        parameters:nil
-                                         requestMethod:TWRequestMethodGET];
-    [fetchUserImageRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if ([urlResponse statusCode] == 200) {
-            UIImage *image = [UIImage imageWithData:responseData];
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                cell.imageView.image = image;
-                [cell setNeedsLayout];
-            });
-        }
-    }];
+                if (userInfo != nil) {
+                    [_usernameCache setObject:[userInfo valueForKey:@"name"] forKey:account.username];
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
+                    });
+                }
+            }
+        }];        
+    }
+    
+    UIImage *image = [_imageCache objectForKey:account.username];
+    if (image) {
+        cell.imageView.image = image;        
+    }
+    else {
+        TWRequest *fetchUserImageRequest = [[TWRequest alloc] 
+                                            initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.twitter.com/1/users/profile_image/%@", account.username]] 
+                                            parameters:nil
+                                            requestMethod:TWRequestMethodGET];
+        [fetchUserImageRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+            if ([urlResponse statusCode] == 200) {
+                UIImage *image = [UIImage imageWithData:responseData];
+                [_imageCache setObject:image forKey:account.username];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
+                });
+            }
+        }];        
+    }
     return cell;
 }
 
