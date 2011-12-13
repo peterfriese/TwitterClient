@@ -50,19 +50,19 @@
 
 - (void)fetchData
 {
-    if (_accounts == nil) {
-        if (_accountStore == nil) {
-            self.accountStore = [[ACAccountStore alloc] init];
+    if (_accountStore == nil) {    
+        self.accountStore = [[ACAccountStore alloc] init];
+        if (_accounts == nil) {
+            ACAccountType *accountTypeTwitter = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+            [self.accountStore requestAccessToAccountsWithType:accountTypeTwitter withCompletionHandler:^(BOOL granted, NSError *error) {
+                if(granted) {
+                    self.accounts = [self.accountStore accountsWithAccountType:accountTypeTwitter];                    
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData]; 
+                    });
+                }
+            }];
         }
-        ACAccountType *accountTypeTwitter = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-        [self.accountStore requestAccessToAccountsWithType:accountTypeTwitter withCompletionHandler:^(BOOL granted, NSError *error) {
-            if(granted) {
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    self.accounts = [self.accountStore accountsWithAccountType:accountTypeTwitter];
-                    [self.tableView reloadData]; 
-                });
-            }
-        }];
     }
 }
 
@@ -109,8 +109,8 @@
                 NSError *error;
                 id userInfo = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
                 if (userInfo != nil) {
-                    [_usernameCache setObject:[userInfo valueForKey:@"name"] forKey:account.username];
                     dispatch_sync(dispatch_get_main_queue(), ^{
+                        [_usernameCache setObject:[userInfo valueForKey:@"name"] forKey:account.username];                        
                         [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
                     });
                 }
@@ -130,8 +130,8 @@
         [fetchUserImageRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
             if ([urlResponse statusCode] == 200) {
                 UIImage *image = [UIImage imageWithData:responseData];
-                [_imageCache setObject:image forKey:account.username];
                 dispatch_sync(dispatch_get_main_queue(), ^{
+                    [_imageCache setObject:image forKey:account.username];                    
                     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:NO];
                 });
             }
