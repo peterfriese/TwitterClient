@@ -125,7 +125,7 @@
     else {
         TWRequest *fetchUserImageRequest = [[TWRequest alloc] 
                                             initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.twitter.com/1/users/profile_image/%@", account.username]] 
-                                            parameters:nil
+                                            parameters:[NSDictionary dictionaryWithObjectsAndKeys:@"bigger", @"size", nil]
                                             requestMethod:TWRequestMethodGET];
         [fetchUserImageRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
             if ([urlResponse statusCode] == 200) {
