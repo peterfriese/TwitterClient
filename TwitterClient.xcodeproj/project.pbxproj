@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		795B851D1577883700F6A65C /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 795B851B1577883700F6A65C /* friends.png */; };
+		795B851E1577883700F6A65C /* friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795B851C1577883700F6A65C /* friends@2x.png */; };
+		795CE6CF15765C540055CBDF /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795CE6CE15765C540055CBDF /* FriendsListViewController.m */; };
 		882735EC1472CAB7009B73B5 /* TweetComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882735EA1472CAB7009B73B5 /* TweetComposeViewController.m */; };
 		882735ED1472CAB7009B73B5 /* TweetComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882735EB1472CAB7009B73B5 /* TweetComposeViewController.xib */; };
 		88850FC114272FBA000A61F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88850FC014272FBA000A61F9 /* UIKit.framework */; };
@@ -22,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		795B851B1577883700F6A65C /* friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends.png; sourceTree = "<group>"; };
+		795B851C1577883700F6A65C /* friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friends@2x.png"; sourceTree = "<group>"; };
+		795CE6CD15765C540055CBDF /* FriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsListViewController.h; sourceTree = "<group>"; };
+		795CE6CE15765C540055CBDF /* FriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsListViewController.m; sourceTree = "<group>"; };
 		882735E91472CAB7009B73B5 /* TweetComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetComposeViewController.h; sourceTree = "<group>"; };
 		882735EA1472CAB7009B73B5 /* TweetComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetComposeViewController.m; sourceTree = "<group>"; };
 		882735EB1472CAB7009B73B5 /* TweetComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetComposeViewController.xib; sourceTree = "<group>"; };
@@ -62,6 +69,8 @@
 		88850FB114272FBA000A61F9 = {
 			isa = PBXGroup;
 			children = (
+				795B851B1577883700F6A65C /* friends.png */,
+				795B851C1577883700F6A65C /* friends@2x.png */,
 				88850FC614272FBA000A61F9 /* TwitterClient */,
 				88850FBF14272FBA000A61F9 /* Frameworks */,
 				88850FBD14272FBA000A61F9 /* Products */,
@@ -98,6 +107,8 @@
 				88850FD8142730A2000A61F9 /* AccountsListViewController.m */,
 				888B42E9144D5FE400A8FAFC /* TweetsListViewController.h */,
 				888B42EA144D5FE400A8FAFC /* TweetsListViewController.m */,
+				795CE6CD15765C540055CBDF /* FriendsListViewController.h */,
+				795CE6CE15765C540055CBDF /* FriendsListViewController.m */,
 				882735E91472CAB7009B73B5 /* TweetComposeViewController.h */,
 				882735EA1472CAB7009B73B5 /* TweetComposeViewController.m */,
 				882735EB1472CAB7009B73B5 /* TweetComposeViewController.xib */,
@@ -169,6 +180,8 @@
 			files = (
 				88850FCB14272FBA000A61F9 /* InfoPlist.strings in Resources */,
 				882735ED1472CAB7009B73B5 /* TweetComposeViewController.xib in Resources */,
+				795B851D1577883700F6A65C /* friends.png in Resources */,
+				795B851E1577883700F6A65C /* friends@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +197,7 @@
 				88850FD9142730A2000A61F9 /* AccountsListViewController.m in Sources */,
 				888B42EB144D5FE400A8FAFC /* TweetsListViewController.m in Sources */,
 				882735EC1472CAB7009B73B5 /* TweetComposeViewController.m in Sources */,
+				795CE6CF15765C540055CBDF /* FriendsListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
