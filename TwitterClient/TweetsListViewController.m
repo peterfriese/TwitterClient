@@ -8,6 +8,7 @@
 
 #import "TweetsListViewController.h"
 #import "TweetComposeViewController.h"
+#import "FriendsListViewController.h"
 
 @interface TweetsListViewController(private)
 - (void)fetchData;
@@ -87,6 +88,15 @@
     [self fetchData];
 }
 
+#pragma mark - Get Friends
+
+- (void)getFriends
+{
+    FriendsListViewController *friendsListViewController = [[FriendsListViewController alloc] init];
+    friendsListViewController.account = self.account;
+    [self.navigationController pushViewController:friendsListViewController animated:TRUE];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -104,7 +114,14 @@
     UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
                                                                              target:self 
                                                                              action:@selector(fetchData)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:compose, refresh, nil];
+    
+    UIImage *image = [UIImage imageNamed:@"friends.png"];
+    UIBarButtonItem *friends = [[UIBarButtonItem alloc] initWithImage:image 
+                                                                style:UIBarButtonItemStylePlain 
+                                                                target:self 
+                                                                action:@selector(getFriends)];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:compose, refresh, friends, nil];
 }
 
 - (void)viewDidUnload
