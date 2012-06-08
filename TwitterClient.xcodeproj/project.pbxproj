@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5005E4C3158250DA008F26C8 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5005E4C2158250DA008F26C8 /* EGORefreshTableHeaderView.m */; };
+		5005E4CA158250F4008F26C8 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005E4C4158250F4008F26C8 /* blackArrow.png */; };
+		5005E4CB158250F4008F26C8 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005E4C5158250F4008F26C8 /* blackArrow@2x.png */; };
+		5005E4CC158250F4008F26C8 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005E4C6158250F4008F26C8 /* blueArrow.png */; };
+		5005E4CD158250F4008F26C8 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005E4C7158250F4008F26C8 /* blueArrow@2x.png */; };
+		5005E4CE158250F4008F26C8 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005E4C8158250F4008F26C8 /* whiteArrow.png */; };
+		5005E4CF158250F4008F26C8 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005E4C9158250F4008F26C8 /* whiteArrow@2x.png */; };
+		5005E4D215825109008F26C8 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005E4D015825109008F26C8 /* grayArrow.png */; };
+		5005E4D315825109008F26C8 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005E4D115825109008F26C8 /* grayArrow@2x.png */; };
+		5005E4D515825163008F26C8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005E4D415825163008F26C8 /* QuartzCore.framework */; };
 		882735EC1472CAB7009B73B5 /* TweetComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 882735EA1472CAB7009B73B5 /* TweetComposeViewController.m */; };
 		882735ED1472CAB7009B73B5 /* TweetComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882735EB1472CAB7009B73B5 /* TweetComposeViewController.xib */; };
 		88850FC114272FBA000A61F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88850FC014272FBA000A61F9 /* UIKit.framework */; };
@@ -22,6 +32,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5005E4C1158250DA008F26C8 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		5005E4C2158250DA008F26C8 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		5005E4C4158250F4008F26C8 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		5005E4C5158250F4008F26C8 /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
+		5005E4C6158250F4008F26C8 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		5005E4C7158250F4008F26C8 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		5005E4C8158250F4008F26C8 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
+		5005E4C9158250F4008F26C8 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
+		5005E4D015825109008F26C8 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
+		5005E4D115825109008F26C8 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
+		5005E4D415825163008F26C8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		882735E91472CAB7009B73B5 /* TweetComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetComposeViewController.h; sourceTree = "<group>"; };
 		882735EA1472CAB7009B73B5 /* TweetComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetComposeViewController.m; sourceTree = "<group>"; };
 		882735EB1472CAB7009B73B5 /* TweetComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetComposeViewController.xib; sourceTree = "<group>"; };
@@ -48,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5005E4D515825163008F26C8 /* QuartzCore.framework in Frameworks */,
 				88850FE014273316000A61F9 /* Accounts.framework in Frameworks */,
 				88850FDE1427330F000A61F9 /* Twitter.framework in Frameworks */,
 				88850FC114272FBA000A61F9 /* UIKit.framework in Frameworks */,
@@ -59,6 +81,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5005E4BF1582509C008F26C8 /* Pull to Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				5005E4D015825109008F26C8 /* grayArrow.png */,
+				5005E4D115825109008F26C8 /* grayArrow@2x.png */,
+				5005E4C4158250F4008F26C8 /* blackArrow.png */,
+				5005E4C5158250F4008F26C8 /* blackArrow@2x.png */,
+				5005E4C6158250F4008F26C8 /* blueArrow.png */,
+				5005E4C7158250F4008F26C8 /* blueArrow@2x.png */,
+				5005E4C8158250F4008F26C8 /* whiteArrow.png */,
+				5005E4C9158250F4008F26C8 /* whiteArrow@2x.png */,
+				5005E4C1158250DA008F26C8 /* EGORefreshTableHeaderView.h */,
+				5005E4C2158250DA008F26C8 /* EGORefreshTableHeaderView.m */,
+			);
+			name = "Pull to Refresh";
+			sourceTree = "<group>";
+		};
 		88850FB114272FBA000A61F9 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +118,7 @@
 		88850FBF14272FBA000A61F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5005E4D415825163008F26C8 /* QuartzCore.framework */,
 				88850FDF14273316000A61F9 /* Accounts.framework */,
 				88850FDD1427330F000A61F9 /* Twitter.framework */,
 				88850FC014272FBA000A61F9 /* UIKit.framework */,
@@ -101,6 +141,7 @@
 				882735E91472CAB7009B73B5 /* TweetComposeViewController.h */,
 				882735EA1472CAB7009B73B5 /* TweetComposeViewController.m */,
 				882735EB1472CAB7009B73B5 /* TweetComposeViewController.xib */,
+				5005E4BF1582509C008F26C8 /* Pull to Refresh */,
 			);
 			path = TwitterClient;
 			sourceTree = "<group>";
@@ -169,6 +210,14 @@
 			files = (
 				88850FCB14272FBA000A61F9 /* InfoPlist.strings in Resources */,
 				882735ED1472CAB7009B73B5 /* TweetComposeViewController.xib in Resources */,
+				5005E4CA158250F4008F26C8 /* blackArrow.png in Resources */,
+				5005E4CB158250F4008F26C8 /* blackArrow@2x.png in Resources */,
+				5005E4CC158250F4008F26C8 /* blueArrow.png in Resources */,
+				5005E4CD158250F4008F26C8 /* blueArrow@2x.png in Resources */,
+				5005E4CE158250F4008F26C8 /* whiteArrow.png in Resources */,
+				5005E4CF158250F4008F26C8 /* whiteArrow@2x.png in Resources */,
+				5005E4D215825109008F26C8 /* grayArrow.png in Resources */,
+				5005E4D315825109008F26C8 /* grayArrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +233,7 @@
 				88850FD9142730A2000A61F9 /* AccountsListViewController.m in Sources */,
 				888B42EB144D5FE400A8FAFC /* TweetsListViewController.m in Sources */,
 				882735EC1472CAB7009B73B5 /* TweetComposeViewController.m in Sources */,
+				5005E4C3158250DA008F26C8 /* EGORefreshTableHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
