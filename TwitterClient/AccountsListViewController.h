@@ -11,7 +11,7 @@
 #import "EGORefreshTableHeaderView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface AccountsListViewController : UITableViewController< EGORefreshTableHeaderDelegate> {
+@interface AccountsListViewController : UITableViewController <EGORefreshTableHeaderDelegate> {
   EGORefreshTableHeaderView *_refreshHeaderView;
   BOOL _reloading;
 }

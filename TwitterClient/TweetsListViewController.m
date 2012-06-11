@@ -22,6 +22,14 @@
 {
     self = [super initWithStyle:style];
     if (self) {
+      if (_refreshHeaderView == nil) {
+        
+        EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.tableView.frame.size.width, self.tableView.bounds.size.height)];
+        view.delegate = self;
+        [self.tableView addSubview:view];
+        _refreshHeaderView = view;
+        _refreshHeaderView.delegate = self;
+      }
     }
     return self;
 }
@@ -38,6 +46,7 @@
 
 - (void)fetchData
 {
+    [_refreshHeaderView refreshLastUpdatedDate];
     NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1/statuses/home_timeline.json"];
     TWRequest *request = [[TWRequest alloc] initWithURL:url 
                                                  parameters:nil 
@@ -64,6 +73,7 @@
         }
     }];
 
+   [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:1.0];  // Need a delay here otherwise it gets called to early and never finishes.
 }
 
 #pragma mark - Compose Tweet
@@ -185,4 +195,56 @@
      */
 }
 
+
+
+
+
+#pragma mark - Data Source Loading / Reloading Methods
+
+- (void)reloadTableViewDataSource
+{
+  // We want fresh data (added new account since launch)
+  
+  _reloading = YES;
+	[self fetchData];
+}
+
+- (void)doneLoadingTableViewData
+{
+	//  model should call this when its done loading
+	_reloading = NO;
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+}
+
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+#pragma mark - EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+{
+	[self reloadTableViewDataSource];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{
+	return _reloading; // should return if data source model is reloading
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view
+{
+	return [NSDate date]; // should return date data source was last changed
+}
+
 @end
+
