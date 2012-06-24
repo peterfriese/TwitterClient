@@ -3,7 +3,7 @@
 //  TwitterClient
 //
 //  Created by Peter Friese on 19.09.11.
-//  Copyright (c) 2011 itemis. All rights reserved.
+//  Copyright (c) 2011, 2012 Peter Friese. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

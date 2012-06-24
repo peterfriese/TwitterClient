@@ -3,7 +3,7 @@
 //  TwitterClient
 //
 //  Created by Peter Friese on 19.09.11.
-//  Copyright (c) 2011 itemis. All rights reserved.
+//  Copyright (c) 2011, 2012 Peter Friese. All rights reserved.
 //
 
 #import "TweetsListViewController.h"
@@ -24,7 +24,11 @@
     if (self) {
       if (_refreshHeaderView == nil) {
         
-        EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.tableView.frame.size.width, self.tableView.bounds.size.height)];
+        EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:
+                                           CGRectMake(0.0f,
+                                                      0.0f - self.tableView.bounds.size.height,
+                                                      self.tableView.frame.size.width,
+                                                      self.tableView.bounds.size.height)];
         view.delegate = self;
         [self.tableView addSubview:view];
         _refreshHeaderView = view;
